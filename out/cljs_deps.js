@@ -1,0 +1,13 @@
+goog.addDependency("base.js", ['goog'], []);
+goog.addDependency("../cljs/core.js", ['cljs.core'], ['goog.string', 'goog.object', 'goog.string.StringBuffer', 'goog.array']);
+goog.addDependency("../clojure/string.js", ['clojure.string'], ['goog.string', 'cljs.core', 'goog.string.StringBuffer']);
+goog.addDependency("../cljs/pprint.js", ['cljs.pprint'], ['goog.string', 'cljs.core', 'goog.string.StringBuffer', 'clojure.string']);
+goog.addDependency("../cljs/test.js", ['cljs.test'], ['cljs.core', 'cljs.pprint', 'clojure.string']);
+goog.addDependency("../jx/reporter/karma.js", ['jx.reporter.karma'], ['cljs.core', 'cljs.test']);
+goog.addDependency("../doo/runner.js", ['doo.runner'], ['cljs.core', 'cljs.test', 'goog.object', 'jx.reporter.karma']);
+goog.addDependency("../expectations_cljs_hello_world/core_test.js", ['expectations_cljs_hello_world.core_test'], ['cljs.core']);
+goog.addDependency("../clojure/set.js", ['clojure.set'], ['cljs.core']);
+goog.addDependency("../expectations/platform.js", ['expectations.platform'], ['goog.string', 'cljs.core', 'goog.string.format']);
+goog.addDependency("../clojure/data.js", ['clojure.data'], ['cljs.core', 'clojure.set']);
+goog.addDependency("../expectations.js", ['expectations'], ['cljs.core', 'clojure.set', 'expectations.platform', 'clojure.string', 'clojure.data']);
+goog.addDependency("../expectations_cljs_hello_world/runner.js", ['expectations_cljs_hello_world.runner'], ['doo.runner', 'cljs.core', 'expectations_cljs_hello_world.core_test', 'expectations']);
