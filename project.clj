@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.40"]
-                 [expectations "2.1.5-SNAPSHOT"]]
+                 [expectations "2.1.8"]]
 
   :plugins [[lein-doo "0.1.6"]]
 
@@ -13,8 +13,7 @@
                         :source-paths ["src" "test"]
                         :compiler {:output-to "resources/public/js/testable.js"
                                    :main expectations-cljs-hello-world.runner
-                                   :optimizations :none
-                                   }}
+                                   :optimizations :none}}
                        {:id "test-node"
                         :source-paths ["src" "test"]
                         :compiler {:output-to "resources/public/js/testable.js"
@@ -23,6 +22,4 @@
                                    :target :nodejs}}]}
 
   :doo {:build "test"
-        :paths {:karma "./node_modules/.bin/karma"}}
-
-  :repositories [["jitpack" "https://jitpack.io"]])
+        :paths {:karma "./node_modules/.bin/karma"}})

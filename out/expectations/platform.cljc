@@ -1,7 +1,7 @@
 (ns expectations.platform
   (:refer-clojure :exclude [bound? format ns-name])
   (:require #?(:clj [clojure.pprint :as pprint])
-            #?(:clj [cljs.analyzer])
+            #?(:cljs [cljs.analyzer])
             #?(:cljs [goog.string])
             #?(:cljs [goog.string.format]))
   #?(:clj (:import (clojure.lang Agent Atom Ref))))
@@ -13,8 +13,8 @@
 #?(:clj
    (defn expanding [n]
      (if (cljs?)
-       `'~(cljs.analyzer/macroexpand-1 {} n)
-       `'~(macroexpand-1 n))))
+       `(cljs.analyzer/macroexpand-1 {} '~n)
+       `(macroexpand-1 '~n))))
 
 #?(:clj
    (defn err-type []
@@ -32,13 +32,13 @@
   #?(:clj clojure.core/format
      :cljs goog.string/format))
 
-(defn node? []
+(defn nodejs? []
   #?(:clj false
      :cljs (= (js* "typeof(process)") "object")))
 
 (defn getenv [var]
   #?(:clj (System/getenv var)
-     :cljs (aget (if (node?) js/process.env js/window) var)))
+     :cljs (aget (if (nodejs?) js/process.env js/window) var)))
 
 (defn get-message [e] (-> e
                           #?(:clj .getMessage
@@ -46,7 +46,7 @@
 
 (defn nano-time []
   #?(:clj (System/nanoTime)
-     :cljs (if (node?)
+     :cljs (if (nodejs?)
              (-> js/process .hrtime js->clj
                  (#(+ (* 1e9 (% 0)) (% 1))))
              (js/performance.now))))
@@ -55,7 +55,7 @@
 (defn on-windows? []
   (re-find #"[Ww]in"
            #?(:clj (System/getProperty "os.name")
-              :cljs (if (node?) (.-platform js/process) ""))))
+              :cljs (if (nodejs?) (.-platform js/process) ""))))
 
 (def pprint
   #?(:clj pprint/pprint
